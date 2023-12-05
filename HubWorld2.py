@@ -51,7 +51,7 @@ def start_hubworld():
 
 def run_hubworld():
     #importing the functions fom modules that run the games:
-    from guiter_hero import run_guitar_hero
+    from guitar_hero import run_guitar_hero
     from brick_breaker import run_brick_breaker
     from snake_game import run_snake_game
     from flappybird import run_flappybird
