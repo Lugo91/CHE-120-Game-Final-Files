@@ -1,3 +1,9 @@
+# This game was not coded by our CHE 120 group and was found and downloaded off of github. 
+# This game was created by the user "Marishwaran99" as a public repository called "BrickBreakerPy"
+# link to Git repo: https://github.com/Marishwaran99/BrickBreakerPy
+#- Luc Gorbet
+
+
 import pygame,random,time
 pygame.init()
 def back_to_hub(): #Code added by LG

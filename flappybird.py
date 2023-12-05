@@ -2,6 +2,11 @@
 
 """Flappy Bird, implemented using Pygame."""
 
+# This game was not coded by our CHE 120 group and was found and downloaded off of github.
+# Created by GitHub user TimoWilken
+# link to Git repo: https://github.com/TimoWilken/flappy-bird-pygame
+# - Luc Gorbet
+
 import math
 import os
 from random import randint

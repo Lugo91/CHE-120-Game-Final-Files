@@ -2,6 +2,10 @@
 #   Author : Apaar Gupta (@apaar97)
 #   Python 3.5.2 Pygame
 
+# This game was not coded by our CHE 120 group and was found and downloaded off of github. 
+# link to Git repo: https://github.com/apaar97/snake-blockade
+#- Luc Gorbet
+
 import pygame
 import sys
 import time
