@@ -8,7 +8,6 @@ Created on Sat Nov 11 16:04:28 2023
 
 
 import pygame
-import os # to be able to search the right directory when finding images
 
 pygame.init()
 
@@ -28,27 +27,27 @@ info2_text = font_small.render('and press space bar to enter games', True, "Whit
 info1_rect = info1_text.get_rect(midbottom = (200,135))
 info2_rect = info2_text.get_rect(midbottom = (200,160))
 
-def start_hubworld():
+def start_hubworld(): #this is the function that runs when you first run the HubWorld2.py file
       screen = pygame.display.set_mode((400,400)) # making a display screen & specifying size
-      clock = pygame.time.Clock()
+      clock = pygame.time.Clock() #allows us to chnage framerate of game
       
       while True:
           
-          for event in pygame.event.get():
+          for event in pygame.event.get(): 
               # making game exitable (VERY IMPORTANT!)
-              if event.type == pygame.QUIT:
-                  pygame.quit()
-                  exit()
+              if event.type == pygame.QUIT: #when the player hits the close window button in the top right the code in the if statement will run
+                  pygame.quit() #quits pygame
+                  exit() #exits the window/ closes the application.
               
-              if event.type == pygame.KEYDOWN:
-                   if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_SPACE:
-                       run_hubworld()
+              if event.type == pygame.KEYDOWN:# test if a key on keyboard is being pressed
+                   if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_SPACE: #if the key that is being pressed is one of these, the code within the if statement bellow will run
+                       run_hubworld() #runs the arcade function that allows player to run arround and play games.
                        
-          screen.blit(carpet_surface, (0,0))
-          screen.blit(start_text, start_rect)
-          screen.blit(info1_text, info1_rect)
-          screen.blit(info2_text, info2_rect)
-          pygame.display.update()
+          screen.blit(carpet_surface, (0,0)) #displaying background on screen 
+          screen.blit(start_text, start_rect) #creates a string that displays a welcome message to the player 
+          screen.blit(info1_text, info1_rect) # creates a string that displays a message on how to satrt the game 
+          screen.blit(info2_text, info2_rect)# creates a string that displays a message on how to satrt the game 
+          pygame.display.update() #updates the screen to show anything that is trying to be displayed on the main screen.
 
 def run_hubworld():
     #importing the functions fom modules that run the games:
@@ -61,7 +60,6 @@ def run_hubworld():
     
     # initiating the pygame module (required in order to use pygame properly)
     pygame.init()
-    #os.chdir('N:\CHE 120\Assignments\Game')
     screen = pygame.display.set_mode((400,400)) # making a display screen & specifying size
     clock = pygame.time.Clock()
     #This loads the image that will be used as the entrance to each game
