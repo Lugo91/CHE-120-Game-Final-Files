@@ -181,7 +181,7 @@ def run_rainy_raiders():
             for event in pygame.event.get(): #list of all the different evetns we can check 
                 if event.type == pygame.QUIT: #if user closes game 
                     run = False #ends game 
-                    back_to_hub()
+                    back_to_hub() #This allows the user to return back to hub when the game is closed
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LCTRL and len(yellow_bullets) < MAX_BULLETS:
                         bullet = pygame.Rect(yellow.x + yellow.width, yellow.y + yellow.height//2 -2, 10, 5) # taking top left hand corner and hadding the height/2 so it comes frim mid 
