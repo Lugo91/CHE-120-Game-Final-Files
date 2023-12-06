@@ -5,6 +5,8 @@ Created on Tue Nov 14 10:12:07 2023
 
 @author: akshansha
 """
+#code written and commented by Akshansh #21067101
+
 #this function which runs hubworld again runs when game is over or user quits
 def back_to_hub():
     import HubWorld2

@@ -3,9 +3,9 @@
 """
 Created on Sat Nov 11 16:04:28 2023
 
-@author: akshansha
+@author: lucgo
 """
-
+#code written and commented by Luc and Akshansh
 
 import pygame
 

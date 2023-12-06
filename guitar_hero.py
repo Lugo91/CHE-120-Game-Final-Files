@@ -4,6 +4,7 @@ Created on Sat Nov 11 19:30:11 2023
 
 @author: lucgo
 """
+#Code written and commented by Luc Gorbet #21088307
 
 import pygame #importing pygame module
 import random #importing random module to be able to randomly generate game components
@@ -46,10 +47,10 @@ b_note = pygame.image.load('graphics/games/guitar hero/blue_note.png').convert_a
 b_top_rect = b_note.get_rect(midbottom = (280,199))
 
 #setting key effects to be off when game starts... these boolean variables will be used to determine when a note is being pressed (setting them to False at the start)
-g_active = False #boolean value of wheather the green note is being played/pressed by the user
-r_active = False #boolean value of wheather the red note is being played/pressed by the user
-y_active = False #boolean value of wheather the yellow note is being played/pressed by the user
-b_active = False #boolean value of wheather the blue note is being played/pressed by the user
+g_active = False #boolean value of wheather the green note(F key) is being played/pressed by the user
+r_active = False #boolean value of wheather the red note(G key) is being played/pressed by the user
+y_active = False #boolean value of wheather the yellow note(H key) is being played/pressed by the user
+b_active = False #boolean value of wheather the blue note(J key) is being played/pressed by the user
 
 #score and lives
 font = pygame.font.Font(None, 30) #this line describes a font("None") using pygame and sets the font size to 30 pixels and assigns this to the variable named "font"
@@ -59,7 +60,7 @@ font = pygame.font.Font(None, 30) #this line describes a font("None") using pyga
 mode = 'start' #the mode variable is checked later in the code to test the part of the game the player is in. The start mode is the  home screen, "play" is the name of the mode in which the code will run the plable game. And "lost" is the mode when the player has lost all their lives.
 large_font = pygame.font.Font(None, 60) #describes another font using the same pygame function but this font is larger and assigned to the variable "large_font". This font will be used for things like title screens.
 text_start = large_font.render('Press space to start', True, 'White') #creating text to display to the user. the first argument string is the text that i want displayed, the second argument is whether i want antialias, and the third is the colour i want the text to be displayed as.
-start_rect = text_start.get_rect(midbottom = (250, 155))
+start_rect = text_start.get_rect(midbottom = (250, 155)) #assigns a position to the text_start text by seeing how big the string is pixel wize and assigns the bottom middle the the point (250, 155) 
 text_instructions = font.render('Use F, G, H, and J to play the right notes', True, 'White')
 instructions_rect = text_instructions.get_rect(midbottom = (250, 180))
 text_try_again = font.render('Press space to play again', True, 'Red')
@@ -207,7 +208,7 @@ def run_guitar_hero():
                 bnote_rect.clear()
                 
             for event in pygame.event.get():
-                # making game exitable (VERY IMPORTANT!)
+                # making game exitable while playing the game (when mode == 'play')
                 if event.type == pygame.QUIT:
                     back_to_hub()
         
@@ -298,12 +299,14 @@ def run_guitar_hero():
                      spawn_blue()
             
         #=== displaying notes on screen and colision system ================================================================
-            
+            #this section of the code, takes the already astablished imgaes of the notes and their rectangles and chnages their rectangle position to make the notes move. This is also where the notes get displayed on the screen.
+            #it also checks whether the coloured notes and it's respective key are coliding if the player clicks the button.
+        
             #green notes
-            for g in range(len(gnote_rect)-1):
-                gnote_rect[g].x += gnoteX_change
-                gnote_rect[g].y += gnoteY_change
-                screen.blit(gnote_img[g], gnote_rect[g])
+            for g in range(len(gnote_rect)-1): #for loop that is in the range of the number of green notes that have been addded to the gnote_rect & gnote_img lists. only checks the length of one since the two will always have the same length. The reasoning for the "len() -1" is because there could be x number of elements in the list but the position of the last one would be x-1.
+                gnote_rect[g].x += gnoteX_change #for every rectangle in the list, this line changes its x position by the preset variable that corresponds to its x velocity (noteX_change) and reasigns that x value to the rect making it move.
+                gnote_rect[g].y += gnoteY_change #does the same thing as the code above but changing the y position of the rectangle.
+                screen.blit(gnote_img[g], gnote_rect[g]) #takes the image 
                 
                 #detecting colisions (i.e. when player plays note at right time)
                 if g_key_rect.colliderect(gnote_rect[g]) and g_active:
@@ -311,10 +314,10 @@ def run_guitar_hero():
                     gnote_img.remove(gnote_img[g])
                     score += 1
                 
-                if gnote_rect[g].y > 560:
-                    gnote_rect.remove(gnote_rect[g])
-                    gnote_img.remove(gnote_img[g])
-                    lives -= 1
+                if gnote_rect[g].y > 560: #this is checking whether any of the green notes have gone out of frame this way they can be revomed from the list of images that get displayed (gnote_img) and so that I can track how many notes the player misses to remove a life. 
+                    gnote_rect.remove(gnote_rect[g]) #if a green note is no longer on the screen, remove it's rectangle form the green note rectangle list (gnote_rect) as that note and it's rectangle has no use anymore since it's off screen.
+                    gnote_img.remove(gnote_img[g]) #removes the image of the green note that has gone past the screen from the list of green notes images to display on the screen. 
+                    lives -= 1 #takes away a life from the player for having missed a note. simply done by using augmented assignment to subtract one from the current lives value and reassign the new number to the lives variable.
                 
             #red notes
             for r in range(len(rnote_rect)-1):
@@ -367,12 +370,12 @@ def run_guitar_hero():
                     bnote_img.remove(bnote_img[b])
                     lives -= 1
             
-            text_score = font.render('Score: ' + str(int(score)) , False, 'White')
-            score_rect = text_score.get_rect(midbottom = (250, 180))
-            text_lives = font.render('Lives: ' + str(int(lives)), False, 'Red')
-            lives_rect = text_lives.get_rect(midbottom = (250,155))
+            text_score = font.render('Score: ' + str(int(score)) , False, 'White') #creates text that will dispay the players curent score 
+            score_rect = text_score.get_rect(midbottom = (250, 180)) #rectangle that defines a position. will be used to position the string above on the screen
+            text_lives = font.render('Lives: ' + str(int(lives)), False, 'Red') #creates text that will dispay the player's curent number of lives so that they can track however many notees they have missed and make sure to not miss any more.
+            lives_rect = text_lives.get_rect(midbottom = (250,155)) #rectangle that defines a position. will be used to position the string above on the screen
             
-            screen.blit(text_score, score_rect)
+            screen.blit(text_score, score_rect) 
             screen.blit(text_lives, lives_rect)
             pygame.display.update()
-            clock.tick(40)
+            clock.tick(40) #setting the frames per second to 40. meaning this code will try and run 40 times per second
